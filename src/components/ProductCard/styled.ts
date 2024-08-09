@@ -30,14 +30,3 @@ export const ProductText = styled.div`
         line-height: 22px;
     }
 `
-
-export const ProductButton = styled.button`
-    background-color: ${colors.cream};
-    color: ${colors.red};
-    font-size: 14px;
-    font-weight: 700;
-    border: none;
-    width: 100%;
-    padding-block: 4px;
-    cursor: pointer;
-`

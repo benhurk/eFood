@@ -1,4 +1,5 @@
-import { ProductButton, ProductContainer, ProductImg, ProductText } from "./styled";
+import Button from "../Button";
+import { ProductContainer, ProductImg, ProductText } from "./styled";
 
 type Props = {
     image: string;
@@ -14,7 +15,7 @@ export default function ProductCard({image, title, description}: Props) {
                 <h3 className='product_title'>{title}</h3>
                 <p className='product_description'>{description}</p>
             </ProductText>
-            <ProductButton>Adicionar ao carrinho</ProductButton>
+            <Button color='cream' width='100%'>Adicionar ao carrinho</Button>
         </ProductContainer>
     )
 }
