@@ -42,6 +42,7 @@ export const BannerText = styled.div`
 export const RestaurantType = styled.span`
     position: relative;
     font-weight: 100;
+    text-transform: capitalize;
 `
 
 export const RestaurantName = styled.span`

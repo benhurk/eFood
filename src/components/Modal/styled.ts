@@ -9,9 +9,9 @@ export const ModalContainer = styled.div`
     left: 0;
     display: flex;
     align-items: center;
+`
 
-    &::before {
-        content: '';
+export const ModalOverlay = styled.div`
         position: fixed;
         top: 0;
         left: 0;
@@ -19,7 +19,6 @@ export const ModalContainer = styled.div`
         height: 100%;
         background-color: #000;
         opacity: .8;
-    }
 `
 
 export const ModalContent =  styled.div`
@@ -29,8 +28,9 @@ export const ModalContent =  styled.div`
     display: flex;
     gap: 24px;
 
-    img {
-        max-width: 280px;
+    .product_img {
+        width: 280px;
+        height: 280px;
         object-fit: cover;
         object-position: center center;
     }
@@ -39,6 +39,7 @@ export const ModalContent =  styled.div`
         display: flex;
         flex-direction: column;
         gap: 16px;
+        justify-content: center;
         color: ${colors.cream};
 
         h3 {
