@@ -1,14 +1,18 @@
 import { BannerContainer, BannerImg, BannerText, RestaurantName, RestaurantType } from "./styled";
 
-import bgImg from '../../assets/cardimg.png';
+type Props = {
+    image: string;
+    type: string;
+    name: string;
+}
 
-export default function RestaurantBanner() {
+export default function RestaurantBanner({image, type, name}: Props) {
     return (
         <BannerContainer>
-            <BannerImg style={{backgroundImage: `url(${bgImg})`}} />
+            <BannerImg style={{backgroundImage: `url(${image})`}} />
             <BannerText className="container">
-                <RestaurantType>Japonesa</RestaurantType>
-                <RestaurantName>Hioki Sushi</RestaurantName>
+                <RestaurantType>{type}</RestaurantType>
+                <RestaurantName>{name}</RestaurantName>
             </BannerText>
         </BannerContainer>
     )

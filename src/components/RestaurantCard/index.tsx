@@ -4,20 +4,22 @@ import star from '../../assets/star.svg';
 import { CardContainer, RestaurantBanner, RestaurantBody, RestaurantLink, RestaurantRating, RestaurantTag, TitleArea } from "./styled"
 
 export type Props = {
+    id: number;
     banner: string,
     name: string,
-    rating: string,
+    rating: number,
     description: string,
     tags: string[]
 }
 
-export default function RestaurantCard({banner, name, rating, description, tags}: Props) {
+export default function RestaurantCard({id, banner, name, rating, description, tags}: Props) {
     return (
         <CardContainer>
-            <Link to='/restaurante'>
+            <Link to={`/restaurante/${id}`}>
                 <RestaurantBanner style={{backgroundImage: `url(${banner})`}}>
                     {
                         tags.map(tag => (
+                            tag &&
                             <RestaurantTag key={tag}>{tag}</RestaurantTag>
                         ))
                     }
@@ -34,7 +36,7 @@ export default function RestaurantCard({banner, name, rating, description, tags}
                 <p className="restaurant_description">
                     {description}
                 </p>
-                <RestaurantLink to='/restaurante'>Saiba mais</RestaurantLink>
+                <RestaurantLink to={`/restaurante/${id}`}>Saiba mais</RestaurantLink>
             </RestaurantBody>
         </CardContainer>
     )

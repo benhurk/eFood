@@ -1,11 +1,14 @@
-import banner from '../../assets/cardimg.png';
+import { useContext } from 'react';
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
 import { RestaurantList, SubTitle } from "./styled";
 import RestaurantCard from "../../components/RestaurantCard";
+import { RestaurantContext } from '../../contexts/RestaurantContext';
 
 export default function Home() {
+    const {restaurants} = useContext(RestaurantContext);
+
     return (
         <>
             <HeaderContainer>
@@ -15,15 +18,13 @@ export default function Home() {
             <main>
                 <div className='container'>
                     <RestaurantList>
-                        <li>
-                            <RestaurantCard banner={banner} name='Hioki Sushi' rating='4.9' description='Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!' tags={['Japonesa', 'Destaque']} />
-                        </li>
-                        <li>
-                            <RestaurantCard banner={banner} name='Hioki Sushi' rating='4.9' description='Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!' tags={['Japonesa', 'Destaque']} />
-                        </li>
-                        <li>
-                            <RestaurantCard banner={banner} name='Hioki Sushi' rating='4.9' description='Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!' tags={['Japonesa', 'Destaque']} />
-                        </li>
+                        {
+                            restaurants.map(r => (
+                                <li key={r.id}>
+                                    <RestaurantCard id={r.id} banner={r.capa} name={r.titulo} rating={r.avaliacao} description={r.descricao} tags={[`${r.destacado ? 'Destaque da semana' : ''}`, r.tipo]}  />
+                                </li>
+                            ))
+                        }
                     </RestaurantList>
                 </div>
             </main>

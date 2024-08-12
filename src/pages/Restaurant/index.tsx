@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
@@ -6,17 +7,54 @@ import CartText from "../../styles/CartText";
 import { BackLink, HeaderInfo, ProductList } from "./styled";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
-
-import productImage from '../../assets/pizza.png';
 import Modal from '../../components/Modal'
+import { RestaurantType } from "../../models/restaurant";
+import { ModalContext } from "../../contexts/ModalContext";
 
 export default function Restaurant() {
+    const [restaurant, setRestaurant] = useState<RestaurantType>();
+    const { id } = useParams();
+
+    const {content: modalContent} = useContext(ModalContext);
+
+    useEffect(() => {
+        fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+            .then(res => res.json())
+            .then(data => setRestaurant(data))
+            .catch(error => { throw new Error(error) })
+    }, [id])
+
+    if (!restaurant) {
+        return (
+            <>
+                <HeaderContainer>
+                    <div className="container">
+                        <HeaderInfo>
+                            <li style={{ textAlign: 'start' }}>
+                                <BackLink to='/'>Restaurantes</BackLink>
+                            </li>
+                            <li>
+                                <Link to='/'>
+                                    <SiteTitle />
+                                </Link>
+                            </li>
+                            <li style={{ textAlign: 'end' }}>
+                                <CartText>{`0 produto(s) no carrinho`}</CartText>
+                            </li>
+                        </HeaderInfo>
+                    </div>
+                </HeaderContainer>
+                <span>Carregando...</span>
+            </>
+        )
+    }
+
     return (
         <>
             <HeaderContainer>
                 <div className="container">
                     <HeaderInfo>
-                        <li style={{textAlign: 'start'}}>
+                        <li style={{ textAlign: 'start' }}>
                             <BackLink to='/'>Restaurantes</BackLink>
                         </li>
                         <li>
@@ -24,32 +62,33 @@ export default function Restaurant() {
                                 <SiteTitle />
                             </Link>
                         </li>
-                        <li style={{textAlign: 'end'}}>
+                        <li style={{ textAlign: 'end' }}>
                             <CartText>{`0 produto(s) no carrinho`}</CartText>
                         </li>
                     </HeaderInfo>
                 </div>
-                <RestaurantBanner />
+                <RestaurantBanner image={restaurant.capa} type={restaurant.tipo} name={restaurant.titulo} />
             </HeaderContainer>
             <main>
                 <section>
                     <div className="container">
                         <ProductList>
-                            <li>
-                                <ProductCard image={productImage} title="Pizza Marguerita" description="A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!" />
-                            </li>
-                            <li>
-                                <ProductCard image={productImage} title="Pizza Marguerita" description="A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!" />
-                            </li>
-                            <li>
-                                <ProductCard image={productImage} title="Pizza Marguerita" description="A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!" />
-                            </li>
-                            <li>
-                                <ProductCard image={productImage} title="Pizza Marguerita" description="A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!" />
-                            </li>
+                            {
+                                restaurant.cardapio.map(item => (
+                                    <li key={item.id}>
+                                        <ProductCard image={item.foto} title={item.nome} description={item.descricao} productInfo={{
+                                            image: item.foto,
+                                            title: item.nome,
+                                            text: item.descricao,
+                                            info: item.porcao,
+                                            price: item.preco
+                                        }} />
+                                    </li>
+                                ))
+                            }
                         </ProductList>
                     </div>
-                    <Modal name="Pizza Marguerita" image={productImage} info='A pizza Margherita é uma pizza clássica da culinária italiana, reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma base de massa fina e crocante, coberta com molho de tomate fresco, queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem. A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido, o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de sabor herbáceo. É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é uma ótima opção para qualquer ocasião. Serve: de 2 a 3 pessoas' price='R$60,90' />
+                    <Modal title={modalContent.title} image={modalContent.image} text={modalContent.text} info={modalContent.info} price={modalContent.price} />
                 </section>
             </main>
         </>

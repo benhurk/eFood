@@ -1,29 +1,33 @@
-import Button from "../Button";
-import { CloseBtn, ModalContainer, ModalContent } from "./styled";
-import closeIcon from '../../assets/closeX.svg';
 import { useContext } from "react";
+
+import Button from "../Button";
+import { CloseBtn, ModalContainer, ModalContent, ModalOverlay } from "./styled";
+import closeIcon from '../../assets/closeX.svg';
 import { ModalContext } from "../../contexts/ModalContext";
 
-type Props = {
+export type ModalContentType = {
     image: string;
-    name: string;
+    title: string;
+    text: string;
     info: string;
-    price: string;
+    price: number;
 }
 
-export default function Modal({name, image, info, price}: Props) {
+export default function Modal({title, image, text, info, price}: ModalContentType) {
     const { isOpen, setIsOpen } = useContext(ModalContext);
 
     return (
         <>
             {
                 isOpen &&
-                <ModalContainer onClick={() => setIsOpen(false)}>
+                <ModalContainer>
+                    <ModalOverlay onClick={() => setIsOpen(false)} />
                     <div className="container">
                         <ModalContent>
-                            <img src={image} />
+                            <img className="product_img" src={image} />
                             <div className="modal__inner">
-                                <h3>{name}</h3>
+                                <h3>{title}</h3>
+                                <p>{text}</p>
                                 <p>{info}</p>
                                 <Button color="cream" width="fit-content">{`Adicionar ao carrinho - ${price}`}</Button>
                             </div>
