@@ -5,19 +5,22 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Restaurant from "./pages/Restaurant";
 import ModalProvider from "./contexts/ModalContext";
+import RestaurantProvider from "./contexts/RestaurantContext";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <ModalProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path='/restaurante' element={<Restaurant />} />
-          </Routes>
-        </BrowserRouter>
-      </ModalProvider>
+      <RestaurantProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path='/restaurante/:id' element={<Restaurant />} />
+            </Routes>
+          </BrowserRouter>
+        </ModalProvider>
+      </RestaurantProvider>
       <Footer />
     </>
   )
