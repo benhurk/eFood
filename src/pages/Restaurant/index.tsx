@@ -76,7 +76,7 @@ export default function Restaurant() {
                             {
                                 restaurant.cardapio.map(item => (
                                     <li key={item.id}>
-                                        <ProductCard image={item.foto} title={item.nome} description={item.descricao} productInfo={{
+                                        <ProductCard productInfo={{
                                             image: item.foto,
                                             title: item.nome,
                                             text: item.descricao,
