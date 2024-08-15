@@ -1,12 +1,13 @@
-import React, { SetStateAction, createContext, useState, useEffect } from "react";
+import React, { SetStateAction, createContext } from "react";
 import { RestaurantType } from "../models/restaurant";
+import { useGetRestaurantsQuery } from "../services/api";
 
 type Props = {
     children: React.ReactNode;
 }
 
 type ContextType = {
-    restaurants: RestaurantType[];
+    restaurants: RestaurantType[] | undefined;
     setRestaurants?: React.Dispatch<SetStateAction<RestaurantType[]>>;
 }
 
@@ -16,14 +17,7 @@ export const RestaurantContext = createContext<ContextType>({
 });
 
 export default function RestaurantProvider({children}: Props) {
-    const [restaurants, setRestaurants] = useState<RestaurantType[]>([]);
-
-    useEffect(() => {
-        fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-            .then(res => res.json())
-            .then(data => setRestaurants(data))
-            .catch(error => { throw new Error(error) })
-    }, [])
+    const { data: restaurants } = useGetRestaurantsQuery();
 
     return (
         <RestaurantContext.Provider value={{restaurants}}>{children}</RestaurantContext.Provider>

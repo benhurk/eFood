@@ -1,5 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import { useGetCurrentRestaurantQuery } from "../../services/api";
+import { ModalContext } from "../../contexts/ModalContext";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
@@ -8,21 +11,12 @@ import { BackLink, HeaderInfo, ProductList } from "./styled";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
 import Modal from '../../components/Modal'
-import { RestaurantType } from "../../models/restaurant";
-import { ModalContext } from "../../contexts/ModalContext";
 
 export default function Restaurant() {
-    const [restaurant, setRestaurant] = useState<RestaurantType>();
     const { id } = useParams();
+    const { data: restaurant } = useGetCurrentRestaurantQuery(id!);
 
     const {content: modalContent} = useContext(ModalContext);
-
-    useEffect(() => {
-        fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-            .then(res => res.json())
-            .then(data => setRestaurant(data))
-            .catch(error => { throw new Error(error) })
-    }, [id])
 
     if (!restaurant) {
         return (

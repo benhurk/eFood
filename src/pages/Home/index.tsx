@@ -9,6 +9,12 @@ import { RestaurantContext } from '../../contexts/RestaurantContext';
 export default function Home() {
     const {restaurants} = useContext(RestaurantContext);
 
+    if (!restaurants) {
+        return (
+            <span>carregando...</span>
+        )
+    }
+
     return (
         <>
             <HeaderContainer>
