@@ -1,4 +1,7 @@
+import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { store } from "./store";
 
 import GlobalStyles from "./globalStyles";
 import Home from "./pages/Home";
@@ -9,7 +12,7 @@ import RestaurantProvider from "./contexts/RestaurantContext";
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyles />
       <RestaurantProvider>
         <ModalProvider>
@@ -22,7 +25,7 @@ function App() {
         </ModalProvider>
       </RestaurantProvider>
       <Footer />
-    </>
+    </Provider>
   )
 }
 
