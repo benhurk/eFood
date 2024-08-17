@@ -11,12 +11,13 @@ import { BackLink, HeaderInfo, ProductList } from "./styled";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
 import Modal from '../../components/Modal'
+import Cart from "../../components/Cart";
 
 export default function Restaurant() {
     const { id } = useParams();
     const { data: restaurant } = useGetCurrentRestaurantQuery(id!);
 
-    const {content: modalContent} = useContext(ModalContext);
+    const {props: modalProps} = useContext(ModalContext);
 
     if (!restaurant) {
         return (
@@ -71,20 +72,30 @@ export default function Restaurant() {
                                 restaurant.cardapio.map(item => (
                                     <li key={item.id}>
                                         <ProductCard productInfo={{
-                                            image: item.foto,
-                                            title: item.nome,
-                                            text: item.descricao,
-                                            info: item.porcao,
-                                            price: item.preco
+                                            content: {
+                                                image: item.foto,
+                                                title: item.nome,
+                                                text: item.descricao,
+                                                info: item.porcao,
+                                                price: item.preco
+                                            },
+                                            product: item
                                         }} />
                                     </li>
                                 ))
                             }
                         </ProductList>
                     </div>
-                    <Modal title={modalContent.title} image={modalContent.image} text={modalContent.text} info={modalContent.info} price={modalContent.price} />
+                    <Modal content={{
+                        image: modalProps.content.image,
+                        title: modalProps.content.title,
+                        text: modalProps.content.text,
+                        info: modalProps.content.info,
+                        price: modalProps.content.price
+                    }} product={modalProps.product} />
                 </section>
             </main>
+            <Cart />
         </>
     )
 }

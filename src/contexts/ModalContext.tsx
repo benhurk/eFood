@@ -1,5 +1,5 @@
 import React, { SetStateAction, createContext, useState } from "react";
-import { ModalContentType } from "../components/Modal";
+import { ModalProps } from "../components/Modal";
 
 type Props = {
     children: React.ReactNode;
@@ -8,30 +8,40 @@ type Props = {
 type ContextType = {
     isOpen: boolean;
     setIsOpen: React.Dispatch<SetStateAction<boolean>>;
-    content: ModalContentType;
-    setContent: React.Dispatch<SetStateAction<ModalContentType>>;
+    props: ModalProps;
+    setProps: React.Dispatch<SetStateAction<ModalProps>>;
 }
 
-const initialContentState = {
-    image: "",
-    title: "",
-    text: "",
-    info: "",
-    price: 0
+const initialState: ModalProps = {
+    content: {
+        image: "",
+        title: "",
+        text: "",
+        info: "",
+        price: 0
+    },
+    product: {
+        foto: "",
+        preco: 0,
+        id: 0,
+        nome: "",
+        descricao: "",
+        porcao: ""
+    }
 };
 
 export const ModalContext = createContext<ContextType>({
     isOpen: false,
     setIsOpen: () => {},
-    content: initialContentState,
-    setContent: () => {}
+    props: initialState,
+    setProps: () => {}
 });
 
 export default function ModalProvider({children}: Props) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [content, setContent] = useState<ModalContentType>(initialContentState);
+    const [props, setProps] = useState<ModalProps>(initialState);
 
     return (
-        <ModalContext.Provider value={{isOpen, setIsOpen, content, setContent}}>{children}</ModalContext.Provider>
+        <ModalContext.Provider value={{isOpen, setIsOpen, props, setProps}}>{children}</ModalContext.Provider>
     )
 }
