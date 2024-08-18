@@ -24,8 +24,9 @@ export type ModalProps = {
     product: ProductType;
 }
 
-export default function Modal({content, product}: ModalProps) {
+export default function Modal() {
     const { isOpen, setIsOpen } = useContext(ModalContext);
+    const { content, product } = useContext(ModalContext).props;
 
     const dispatch = useDispatch();
 

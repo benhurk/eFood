@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { useGetCurrentRestaurantQuery } from "../../services/api";
-import { ModalContext } from "../../contexts/ModalContext";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
@@ -16,8 +14,6 @@ import Cart from "../../components/Cart";
 export default function Restaurant() {
     const { id } = useParams();
     const { data: restaurant } = useGetCurrentRestaurantQuery(id!);
-
-    const {props: modalProps} = useContext(ModalContext);
 
     if (!restaurant) {
         return (
@@ -86,13 +82,7 @@ export default function Restaurant() {
                             }
                         </ProductList>
                     </div>
-                    <Modal content={{
-                        image: modalProps.content.image,
-                        title: modalProps.content.title,
-                        text: modalProps.content.text,
-                        info: modalProps.content.info,
-                        price: modalProps.content.price
-                    }} product={modalProps.product} />
+                    <Modal />
                 </section>
             </main>
             <Cart />
