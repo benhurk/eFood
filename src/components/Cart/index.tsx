@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggle } from "../../store/reducers/cart";
+import { remove, toggle } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
 import formatPrice from "../../utils/formatPrice";
 
 import { CartContainer, CartContent, CartItem, CartList, CartOverlay, CartPrice } from "./styled";
 import Button from "../Button";
+import CloseButton from "../CloseButton";
+import deleteIcon from "../../assets/delete-icon.svg";
 
 export default function Cart() {
     const { items, isOpen } = useSelector((state: RootReducer) => state.cart);
@@ -22,6 +24,7 @@ export default function Cart() {
             <CartContainer>
                 <CartOverlay onClick={() => dispatch(toggle())} />
                 <CartContent>
+                    <CloseButton onClick={() => dispatch(toggle())} />
                     {
                         items.length > 0
                         ?
@@ -35,6 +38,7 @@ export default function Cart() {
                                                     <h4>{item.nome}</h4>
                                                     <span>{formatPrice(item.preco)}</span>
                                                 </div>
+                                                <button type="button" onClick={() => dispatch(remove(item.id))}><img src={deleteIcon} /></button>
                                             </CartItem>
                                         </li>
                                     ))
