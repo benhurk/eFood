@@ -26,8 +26,13 @@ export const CartContent = styled.aside`
     background-color: ${colors.red};
     padding: 32px 8px;
 
+    .close_btn {
+        margin-bottom: 16px;
+    }
+
     .empty_warn {
         color: ${colors.cream};
+        display: block;
     }
 `
 
@@ -38,6 +43,7 @@ export const CartList = styled.ul`
 `
 
 export const CartItem = styled.div`
+    position: relative;
     width: 100%;
     display: flex;
     color: ${colors.red};
@@ -59,6 +65,23 @@ export const CartItem = styled.div`
 
     span {
         font-size: 14px;
+    }
+
+    button {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        bottom: 8px;
+        right: 8px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
     }
 `
 
