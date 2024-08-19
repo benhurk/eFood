@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useGetCurrentRestaurantQuery } from "../../services/api";
 import { RootReducer } from "../../store";
 import { toggle } from "../../store/reducers/cart";
-import { ModalContext } from "../../contexts/ModalContext";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
@@ -21,8 +19,6 @@ export default function Restaurant() {
     const { data: restaurant } = useGetCurrentRestaurantQuery(id!);
     const { items } = useSelector((state: RootReducer) => state.cart);
     const dispatch = useDispatch();
-
-    const {props: modalProps} = useContext(ModalContext);
 
     if (!restaurant) {
         return (
@@ -85,13 +81,7 @@ export default function Restaurant() {
                             }
                         </ProductList>
                     </div>
-                    <Modal content={{
-                        image: modalProps.content.image,
-                        title: modalProps.content.title,
-                        text: modalProps.content.text,
-                        info: modalProps.content.info,
-                        price: modalProps.content.price
-                    }} product={modalProps.product} />
+                    <Modal />
                 </section>
             </main>
             <Cart />
