@@ -28,6 +28,12 @@ export const ModalContent =  styled.div`
     display: flex;
     gap: 24px;
 
+    .close_btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
     .product_img {
         width: 280px;
         height: 280px;
@@ -52,13 +58,4 @@ export const ModalContent =  styled.div`
             line-height: 22px;
         }
     }
-`
-
-export const CloseBtn = styled.button`
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
 `
