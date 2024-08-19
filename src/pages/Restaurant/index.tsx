@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useGetCurrentRestaurantQuery } from "../../services/api";
+import { RootReducer } from "../../store";
+import { toggle } from "../../store/reducers/cart";
 import { ModalContext } from "../../contexts/ModalContext";
 
 import HeaderContainer from "../../styles/HeaderContainer";
@@ -16,6 +19,8 @@ import Cart from "../../components/Cart";
 export default function Restaurant() {
     const { id } = useParams();
     const { data: restaurant } = useGetCurrentRestaurantQuery(id!);
+    const { items } = useSelector((state: RootReducer) => state.cart);
+    const dispatch = useDispatch();
 
     const {props: modalProps} = useContext(ModalContext);
 
@@ -25,16 +30,10 @@ export default function Restaurant() {
                 <HeaderContainer>
                     <div className="container">
                         <HeaderInfo>
-                            <li style={{ textAlign: 'start' }}>
-                                <BackLink to='/'>Restaurantes</BackLink>
-                            </li>
                             <li>
                                 <Link to='/'>
                                     <SiteTitle />
                                 </Link>
-                            </li>
-                            <li style={{ textAlign: 'end' }}>
-                                <CartText>{`0 produto(s) no carrinho`}</CartText>
                             </li>
                         </HeaderInfo>
                     </div>
@@ -58,7 +57,7 @@ export default function Restaurant() {
                             </Link>
                         </li>
                         <li style={{ textAlign: 'end' }}>
-                            <CartText>{`0 produto(s) no carrinho`}</CartText>
+                            <CartText onClick={() => dispatch(toggle())}>{`${items.length} produto(s) no carrinho`}</CartText>
                         </li>
                     </HeaderInfo>
                 </div>
