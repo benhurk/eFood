@@ -28,6 +28,11 @@ export const ModalContent =  styled.div`
     display: flex;
     gap: 24px;
 
+    @media (max-width: 767px) {
+        flex-direction: column;
+        padding-inline: 16px;
+    }
+
     .close_btn {
         position: absolute;
         top: 8px;
@@ -39,6 +44,12 @@ export const ModalContent =  styled.div`
         height: 280px;
         object-fit: cover;
         object-position: center center;
+        
+        @media (max-width: 767px) {
+            max-width: 280px;
+            width: 100%;
+            align-self: center;
+        }
     }
 
     .modal__inner {
@@ -51,11 +62,21 @@ export const ModalContent =  styled.div`
         h3 {
             font-size: 18px;
             font-weight: 900;
+
+            @media (max-width: 767px) {
+            text-align: center;
+            } 
         }
 
         p {
             font-size: 14px;
             line-height: 22px;
+        }
+
+        @media (max-width: 767px) {
+            button {
+                margin-inline: auto;
+            }
         }
     }
 `

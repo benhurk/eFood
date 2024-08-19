@@ -26,6 +26,10 @@ export const CartContent = styled.aside`
     background-color: ${colors.red};
     padding: 32px 8px;
 
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+
     .close_btn {
         margin-bottom: 16px;
     }
