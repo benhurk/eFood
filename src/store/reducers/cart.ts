@@ -4,12 +4,10 @@ import { ProductType } from "../../models/restaurant";
 
 type CartState = {
     items: ProductType[];
-    isOpen: boolean;
 }
 
 const initialState: CartState = {
-    items: [],
-    isOpen: false
+    items: []
 }
 
 const cartSlice = createSlice({
@@ -21,12 +19,9 @@ const cartSlice = createSlice({
         },
         remove: (state, action: PayloadAction<number>) => {
             state.items = state.items.filter(item => item.id !== action.payload);
-        },
-        toggle: (state) => {
-            state.isOpen = !state.isOpen;
         }
     }
 })
 
-export const { add, remove, toggle } = cartSlice.actions;
+export const { add, remove } = cartSlice.actions;
 export default cartSlice.reducer;

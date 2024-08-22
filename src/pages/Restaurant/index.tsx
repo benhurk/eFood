@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { setSidebarContent, toggleSidebar } from "../../store/reducers/sidebar";
 import { useGetCurrentRestaurantQuery } from "../../services/api";
 import { RootReducer } from "../../store";
-import { toggle } from "../../store/reducers/cart";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
@@ -12,7 +12,7 @@ import { BackLink, HeaderInfo, ProductList } from "./styled";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
 import Modal from '../../components/Modal'
-import Cart from "../../components/Cart";
+import Sidebar from "../../components/Sidebar";
 
 export default function Restaurant() {
     const { id } = useParams();
@@ -53,7 +53,7 @@ export default function Restaurant() {
                             </Link>
                         </li>
                         <li style={{ textAlign: 'end' }}>
-                            <CartText onClick={() => dispatch(toggle())}>{`${items.length} produto(s) no carrinho`}</CartText>
+                            <CartText onClick={() => {dispatch(toggleSidebar()); dispatch(setSidebarContent('Cart'))}} >{`${items.length} produto(s) no carrinho`}</CartText>
                         </li>
                     </HeaderInfo>
                 </div>
@@ -84,7 +84,7 @@ export default function Restaurant() {
                     <Modal />
                 </section>
             </main>
-            <Cart />
+            <Sidebar />
         </>
     )
 }

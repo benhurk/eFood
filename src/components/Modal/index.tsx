@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { add, toggle } from "../../store/reducers/cart";
+import { add } from "../../store/reducers/cart";
+import { setSidebarContent, toggleSidebar } from "../../store/reducers/sidebar";
 import { RootReducer } from "../../store";
 
 import formatPrice from "../../utils/formatPrice";
@@ -36,7 +37,8 @@ export default function Modal() {
 
     const addToCart = () => {
         setIsOpen(false);
-        dispatch(toggle());
+        dispatch(toggleSidebar());
+        dispatch(setSidebarContent('Cart'));
         dispatch(add(product));
     }
 
