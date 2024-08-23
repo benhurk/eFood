@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Content = 'Cart' | 'Address' | 'Payment' | 'Success';
+import { Content } from "../../components/Sidebar";
 
 type SidebarState = {
     isOpen: boolean;
