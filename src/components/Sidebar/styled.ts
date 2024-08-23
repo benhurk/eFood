@@ -35,7 +35,14 @@ export const SidebarContent = styled.aside`
     }
 
     .empty_warn {
-        color: ${colors.cream};
+        ${colors.cream};
         display: block;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 16px;
+        font-weight: 700;
+        color: ${colors.cream};
     }
 `
