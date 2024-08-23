@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const colors = {
     bgLight: '#FFF8F2',
+    dark: '#4B4B4B',
     cream: '#FFEBD9',
     red: '#E66767'
 }
