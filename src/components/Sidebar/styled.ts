@@ -35,8 +35,9 @@ export const SidebarContent = styled.aside`
     }
 
     .empty_warn {
-        ${colors.cream};
+        color: ${colors.cream};
         display: block;
+        text-align: center;
     }
 
     h2 {
