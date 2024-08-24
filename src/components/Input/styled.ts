@@ -15,10 +15,28 @@ export const Label = styled.label`
 
 export const InputField = styled.input`
     width: 100%;
-    border: none;
+    border: 1px solid ${colors.cream};
     background-color: ${colors.cream};
     color: ${colors.dark};
     font-size: 14px;
     font-weight: 700;
     padding: 8px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.input_invalid {
+        border: 1px solid crimson;
+
+        &::placeholder {
+            color: red;
+            opacity: 0.6; /* Firefox */
+        }
+
+        &::-ms-input-placeholder { /* Edge 12 -18 */
+            color: red;
+            opacity: 0.6;
+        }
+    }
 `
