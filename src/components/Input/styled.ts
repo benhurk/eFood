@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../globalStyles";
+import ReactInputMask from "react-input-mask";
 
 export const InputContainer = styled.div`
     width: 100%;
@@ -13,7 +14,7 @@ export const Label = styled.label`
     margin-bottom: 8px;
 `
 
-export const InputField = styled.input`
+export const InputField = styled(ReactInputMask)`
     width: 100%;
     border: 1px solid ${colors.cream};
     background-color: ${colors.cream};
