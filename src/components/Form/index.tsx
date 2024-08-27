@@ -39,7 +39,7 @@ export default function Form({content, orderRequest}: Props) {
                     name: Yup.string().min(2, 'Nome inválido').required('Preencha esse campo'),
                     address: Yup.string().required('Preencha esse campo'),
                     city: Yup.string().required('Preencha esse campo'),
-                    cep: Yup.string().min(9, 'CEP inválido').max(9, 'CEP inválido').required('Preencha esse campo'),
+                    cep: Yup.string().min(10, 'CEP inválido').required('Preencha esse campo'),
                     num: Yup.string().required('Preencha esse campo'),
                 });
             }
