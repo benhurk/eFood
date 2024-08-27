@@ -52,7 +52,7 @@ export default function Form({content, orderRequest}: Props) {
                 num: Yup.string().required('Preencha esse campo'),
         
                 cardName: Yup.string().min(2, 'Nome inválido').required('Preencha esse campo'),
-                cardNum: Yup.string().min(16, 'Número inválido').required('Preencha esse campo'),
+                cardNum: Yup.string().min(19, 'Número inválido').required('Preencha esse campo'),
                 cardCvv: Yup.string().required('Preencha esse campo'),
                 cardMonth: Yup.string().min(2, 'Mês inválido (MM)').max(2, 'Mês inválido (MM)').required('Preencha esse campo'),
                 cardYear: Yup.string().min(2, 'Ano inválido (YY)').max(2, 'Ano inválido (YY)').required('Preencha esse campo')
@@ -81,7 +81,7 @@ export default function Form({content, orderRequest}: Props) {
                             name: values.cardName,
                             number: values.cardNum,
                             expires: {
-                                month: Number(values.cardNum),
+                                month: Number(values.cardMonth),
                                 year: Number(values.cardYear)
                             }
                         }
