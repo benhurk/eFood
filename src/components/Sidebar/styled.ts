@@ -46,4 +46,10 @@ export const SidebarContent = styled.aside`
         font-weight: 700;
         color: ${colors.cream};
     }
+
+    p {
+        font-size: 14px;
+        line-height: 22px;
+        color: ${colors.cream};
+    }
 `

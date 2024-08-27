@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { RootReducer } from "../../store";
-import { toggleSidebar } from "../../store/reducers/sidebar";
+import { setSidebarContent, toggleSidebar } from "../../store/reducers/sidebar";
+import { clear } from "../../store/reducers/cart";
+import { useOrderMutation } from "../../services/api";
 
 import getTotalPrice from "../../utils/getTotalPrice";
 import formatPrice from "../../utils/formatPrice";
@@ -9,13 +13,20 @@ import { SidebarContainer, SidebarContent, SidebarOverlay } from "./styled";
 import Cart from "../Cart";
 import CloseButton from "../CloseButton";
 import Form from "../Form";
+import Button from "../Button";
 
 export type Content = 'Cart' | 'Address' | 'Payment' | 'Success';
 
 export default function Sidebar() {
     const { items } = useSelector((state: RootReducer) => state.cart);
     const { content, isOpen } = useSelector((state: RootReducer) => state.sidebar);
+    const [order, {data, isSuccess}] = useOrderMutation();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setSidebarContent('Success'));
+        dispatch(clear());
+    }, [isSuccess])
 
     function getContent() {
         switch (content) {
@@ -31,10 +42,20 @@ export default function Sidebar() {
                 return (
                     <>
                     <h2>{`Pagamento - Valor a pagar: ${formatPrice(getTotalPrice(items))}`}</h2> 
-                    <Form content='Payment' />
+                    <Form content='Payment' orderRequest={order} />
+                    </>
+                );
+            case "Success":
+                return (
+                    <>
+                    <h2>{`Pedido realizado - ${data.orderId}`}</h2>
+                    <p>Estamos felizes em informar que seu pedido já está em processo de preparação e, em breve, será entregue no endereço fornecido.</p> <br/>
+                    <p>Gostaríamos de ressaltar que nossos entregadores não estão autorizados a realizar cobranças extras.</p> <br/>
+                    <p>Lembre-se da importância de higienizar as mãos após o recebimento do pedido, garantindo assim sua segurança e bem-estar durante a refeição.</p> <br/>
+                    <p>Esperamos que desfrute de uma deliciosa e agradável experiência gastronômica. Bom apetite!</p> <br/>
+                    <Button type='Button' color={"cream"} width={"100%"} onClick={() => dispatch(toggleSidebar())}>Concluir</Button>
                     </>
                 )
-            case "Success":
         }
     }
 
