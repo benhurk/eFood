@@ -25,7 +25,6 @@ export default function Sidebar() {
 
     useEffect(() => {
         dispatch(setSidebarContent('Success'));
-        dispatch(clear());
     }, [isSuccess])
 
     function getContent() {
@@ -53,7 +52,7 @@ export default function Sidebar() {
                     <p>Gostaríamos de ressaltar que nossos entregadores não estão autorizados a realizar cobranças extras.</p> <br/>
                     <p>Lembre-se da importância de higienizar as mãos após o recebimento do pedido, garantindo assim sua segurança e bem-estar durante a refeição.</p> <br/>
                     <p>Esperamos que desfrute de uma deliciosa e agradável experiência gastronômica. Bom apetite!</p> <br/>
-                    <Button type='Button' color={"cream"} width={"100%"} onClick={() => dispatch(toggleSidebar())}>Concluir</Button>
+                    <Button type='Button' color={"cream"} width={"100%"} onClick={() => {dispatch(toggleSidebar()); dispatch(clear());}}>Concluir</Button>
                     </>
                 )
         }
