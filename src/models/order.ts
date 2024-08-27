@@ -3,6 +3,10 @@ type OrderProducts = {
     price: number;
 }
 
+export type OrderResponse = {
+    orderId: string;
+}
+
 type Order = {
     products: OrderProducts[];
 

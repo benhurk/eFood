@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RestaurantType } from "../models/restaurant";
-import Order from "../models/order";
+import Order, { OrderResponse } from "../models/order";
 
 const api = createApi({
     baseQuery: fetchBaseQuery({
@@ -13,7 +13,7 @@ const api = createApi({
         getCurrentRestaurant: builder.query<RestaurantType, string>({
             query: (id) => `restaurantes/${id}`
         }),
-        order: builder.mutation<any, Order>({
+        order: builder.mutation<OrderResponse, Order>({
             query: (body) => ({
                 url: 'checkout',
                 method: 'POST',
