@@ -3,10 +3,14 @@ import { PulseLoader } from "react-spinners";
 import { colors } from "../../globalStyles";
 import { LoaderContainer } from "./styled";
 
-export default function Loader() {
+type Props = {
+    color?: string;
+}
+
+export default function Loader({color = colors.red}: Props) {
     return (
         <LoaderContainer>
-            <PulseLoader color={colors.red} />
+            <PulseLoader color={color} />
         </LoaderContainer>
     )
 }
