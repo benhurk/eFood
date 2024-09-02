@@ -26,13 +26,17 @@ export const BackLink = styled(Link)`
     }
 `
 
+export const RestaurantHeader = styled.section`
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid ${colors.red};
+`
+
 export const RestaurantDescription = styled.p`
-    font-size: 18px;
+    font-size: 16px;
     color: ${colors.red};
     line-height: 24px;
-    margin-bottom: 48px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid ${colors.red};
+    margin-bottom: 16px;
 
     @media (max-width: 767px) {
         font-size: 14px;

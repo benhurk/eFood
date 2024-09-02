@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setSidebarContent, toggleSidebar } from "../../store/reducers/sidebar";
 import { useGetCurrentRestaurantQuery } from "../../services/api";
 import { RootReducer } from "../../store";
+import { filterProducts } from "../../utils/filterSearch";
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import CartText from "../../styles/CartText";
-import { BackLink, HeaderInfo, ProductList, RestaurantDescription } from "./styled";
+import { BackLink, HeaderInfo, ProductList, RestaurantDescription, RestaurantHeader } from "./styled";
 import SiteTitle from "../../components/SiteTitle";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
@@ -17,12 +19,17 @@ import Loader from "../../components/Loader";
 
 import cartIcon from '../../assets/cart-icon.svg';
 import backIcon from '../../assets/back-icon.svg';
+import Input from "../../components/Input";
+import SearchContainer from "../../styles/SearchContainer";
+import NotFoundWarn from "../../styles/SearchNotFound";
 
 type RestaurantParams = {
     id: string;
 }
 
 export default function Restaurant() {
+    const [search, setSearch] = useState('');
+
     const { id } = useParams<RestaurantParams>() as RestaurantParams;
     const { data: restaurant } = useGetCurrentRestaurantQuery(id);
     const { items } = useSelector((state: RootReducer) => state.cart);
@@ -49,23 +56,26 @@ export default function Restaurant() {
                         </li>
                     </HeaderInfo>
                 </div>
-                {
-                    restaurant ?
-                        <RestaurantBanner image={restaurant.capa} type={restaurant.tipo} name={restaurant.titulo} />
-                        :
-                        <Loader />
-                }
+                { restaurant ? <RestaurantBanner image={restaurant.capa} type={restaurant.tipo} name={restaurant.titulo} /> : <Loader /> }
             </HeaderContainer>
             <main>
-                {
-                    restaurant ?
-                        <div className="container">
-                            <section>
-                                <RestaurantDescription>&bull; {restaurant.descricao}</RestaurantDescription>
-                            </section>
+                <div className="container">
+                    {
+                        !restaurant ? <Loader /> :
+                        <>
+                        <RestaurantHeader>
+                            <RestaurantDescription>&bull; {restaurant.descricao}</RestaurantDescription>
+                            <SearchContainer>
+                                <Input label='O que vai querer?' elementId='search_product' value={search}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value)} />
+                            </SearchContainer>
+                        </RestaurantHeader>
+                        {
+                            filterProducts(restaurant.cardapio, search).length > 0 ?
                             <ProductList>
                                 {
-                                    restaurant.cardapio.map(item => (
+                                    filterProducts(restaurant.cardapio, search)
+                                    .map(item => (
                                         <li key={item.id}>
                                             <ProductCard productInfo={{
                                                 content: {
@@ -75,17 +85,19 @@ export default function Restaurant() {
                                                     info: item.porcao,
                                                     price: item.preco
                                                 },
-                                                product: item
+                                                product: {...item, quantity: 1}
                                             }} />
                                         </li>
                                     ))
                                 }
                             </ProductList>
-                            <Modal />
-                        </div>
-                        :
-                        <Loader />
-                }
+                            :
+                            <NotFoundWarn>Nada encontrado, verifique sua busca.</NotFoundWarn>
+                        }
+                        <Modal />
+                        </>
+                    }
+                </div>
             </main>
             <Sidebar />
         </>
