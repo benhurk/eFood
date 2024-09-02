@@ -6,14 +6,17 @@ import { useGetCurrentRestaurantQuery } from "../../services/api";
 import { RootReducer } from "../../store";
 
 import HeaderContainer from "../../styles/HeaderContainer";
-import SiteTitle from "../../components/SiteTitle";
 import CartText from "../../styles/CartText";
-import { BackLink, HeaderInfo, ProductList } from "./styled";
+import { BackLink, HeaderInfo, ProductList, RestaurantDescription } from "./styled";
+import SiteTitle from "../../components/SiteTitle";
 import RestaurantBanner from "../../components/RestaurantBanner";
 import ProductCard from "../../components/ProductCard";
 import Modal from '../../components/Modal'
 import Sidebar from "../../components/Sidebar";
 import Loader from "../../components/Loader";
+
+import cartIcon from '../../assets/cart-icon.svg';
+import backIcon from '../../assets/back-icon.svg';
 
 type RestaurantParams = {
     id: string;
@@ -30,16 +33,19 @@ export default function Restaurant() {
             <HeaderContainer>
                 <div className="container">
                     <HeaderInfo>
-                        <li style={{ textAlign: 'start' }}>
-                            <BackLink to='/'>Restaurantes</BackLink>
+                        <li style={{ justifySelf: 'start' }}>
+                            <BackLink to='/'><img src={backIcon} />Restaurantes</BackLink>
                         </li>
-                        <li>
+                        <li style={{ justifySelf: 'center' }}>
                             <Link to='/'>
                                 <SiteTitle />
                             </Link>
                         </li>
-                        <li style={{ textAlign: 'end' }}>
-                            <CartText onClick={() => { dispatch(toggleSidebar()); dispatch(setSidebarContent('Cart')) }} >{`${items.length} produto(s) no carrinho`}</CartText>
+                        <li style={{ justifySelf: 'end' }}>
+                            <CartText onClick={() => { dispatch(toggleSidebar()); dispatch(setSidebarContent('Cart')) }}>
+                                <img src={cartIcon} />
+                                {`${items.length} produto(s) no carrinho`}
+                            </CartText>
                         </li>
                     </HeaderInfo>
                 </div>
@@ -53,29 +59,30 @@ export default function Restaurant() {
             <main>
                 {
                     restaurant ?
-                        <section>
-                            <div className="container">
-                                <ProductList>
-                                    {
-                                        restaurant.cardapio.map(item => (
-                                            <li key={item.id}>
-                                                <ProductCard productInfo={{
-                                                    content: {
-                                                        image: item.foto,
-                                                        title: item.nome,
-                                                        text: item.descricao,
-                                                        info: item.porcao,
-                                                        price: item.preco
-                                                    },
-                                                    product: item
-                                                }} />
-                                            </li>
-                                        ))
-                                    }
-                                </ProductList>
-                            </div>
+                        <div className="container">
+                            <section>
+                                <RestaurantDescription>&bull; {restaurant.descricao}</RestaurantDescription>
+                            </section>
+                            <ProductList>
+                                {
+                                    restaurant.cardapio.map(item => (
+                                        <li key={item.id}>
+                                            <ProductCard productInfo={{
+                                                content: {
+                                                    image: item.foto,
+                                                    title: item.nome,
+                                                    text: item.descricao,
+                                                    info: item.porcao,
+                                                    price: item.preco
+                                                },
+                                                product: item
+                                            }} />
+                                        </li>
+                                    ))
+                                }
+                            </ProductList>
                             <Modal />
-                        </section>
+                        </div>
                         :
                         <Loader />
                 }

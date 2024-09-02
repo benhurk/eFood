@@ -15,9 +15,29 @@ export const HeaderInfo = styled.ul`
 `
 
 export const BackLink = styled(Link)`
+    display: flex;
+    align-items: center;
     font-size: 18px;
     font-weight: 900;
     color: ${colors.red};
+
+    img {
+        width: 24px;
+    }
+`
+
+export const RestaurantDescription = styled.p`
+    font-size: 18px;
+    color: ${colors.red};
+    line-height: 24px;
+    margin-bottom: 48px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid ${colors.red};
+
+    @media (max-width: 767px) {
+        font-size: 14px;
+        line-height: 20px;
+    }
 `
 
 export const ProductList = styled.ul`
