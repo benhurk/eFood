@@ -5,6 +5,7 @@ export type ProductType = {
     nome: string;
     descricao: string;
     porcao: string;
+    quantity: number;
 }
 
 export type RestaurantType = {

@@ -26,7 +26,8 @@ const initialState: ModalProps = {
         id: 0,
         nome: "",
         descricao: "",
-        porcao: ""
+        porcao: "",
+        quantity: 1
     }
 };
 
@@ -34,7 +35,7 @@ export const ModalContext = createContext<ContextType>({
     isOpen: false,
     setIsOpen: () => {},
     props: initialState,
-    setProps: () => {}
+    setProps: () => {},
 });
 
 export default function ModalProvider({children}: Props) {

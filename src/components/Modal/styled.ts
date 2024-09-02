@@ -21,7 +21,7 @@ export const ModalOverlay = styled.div`
         opacity: .8;
 `
 
-export const ModalContent =  styled.div`
+export const ModalContent = styled.div`
     position: relative;
     background-color: ${colors.red};
     padding: 32px;
@@ -77,6 +77,38 @@ export const ModalContent =  styled.div`
             button {
                 margin-inline: auto;
             }
+
+            small {
+                margin-inline: auto;
+            }
         }
+    }
+`
+
+export const Quantity = styled.div`
+    display: flex;
+    align-items: center;
+
+    label {
+        font-size: 16px;
+        font-weight: 700;
+        margin-right: 8px;
+    }
+
+    input {
+        padding: 4px;
+        border: none;
+        background-color: ${colors.cream};
+        color: ${colors.dark};
+        font-weight: 700;
+        font-size: 14px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    @media (max-width: 767px) {
+        margin-inline: auto;
     }
 `

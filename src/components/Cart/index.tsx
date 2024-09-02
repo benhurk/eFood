@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { remove } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
-import { setSidebarContent } from "../../store/reducers/sidebar";
+import { setSidebarContent, toggleSidebar } from "../../store/reducers/sidebar";
 
 import getTotalPrice from "../../utils/getTotalPrice";
 import formatPrice from "../../utils/formatPrice";
@@ -10,6 +10,7 @@ import formatPrice from "../../utils/formatPrice";
 import { CartItem, CartList, CartPrice } from "./styled";
 import Button from "../Button";
 import deleteIcon from "../../assets/delete-icon.svg";
+import { ButtonArea } from "../Form/styled";
 
 export default function Cart() {
     const { items } = useSelector((state: RootReducer) => state.cart);
@@ -27,8 +28,8 @@ export default function Cart() {
                                     <CartItem>
                                         <img src={item.foto} alt={item.nome} />
                                         <div>
-                                            <h4>{item.nome}</h4>
-                                            <span>{formatPrice(item.preco)}</span>
+                                            <h4>{`${item.nome} ${item.quantity > 1 ? `(x${item.quantity})` : ''}`}</h4>
+                                            <span>{formatPrice(item.preco * item.quantity)}</span>
                                         </div>
                                         <button type="button" onClick={() => dispatch(remove(item.id))}><img src={deleteIcon} /></button>
                                     </CartItem>
@@ -43,9 +44,12 @@ export default function Cart() {
                 <span>Valor total</span>
                 <span>{formatPrice(getTotalPrice(items))}</span>
             </CartPrice>
-            <Button color={"cream"} width={"100%"} disabled={items.length > 0 ? false : true} onClick={() => dispatch(setSidebarContent('Address'))}>
-                Continuar com a entrega
-            </Button>
+            <ButtonArea>
+                <Button color={"cream"} width={"100%"} disabled={items.length > 0 ? false : true} onClick={() => dispatch(setSidebarContent('Address'))}>
+                    Continuar com a entrega
+                </Button>
+                <Button color={"cream"} width={"100%"} onClick={() => dispatch(toggleSidebar())}>Continuar comprando</Button>
+            </ButtonArea>
         </>
     )
 }

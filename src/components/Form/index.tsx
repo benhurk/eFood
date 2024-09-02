@@ -79,7 +79,7 @@ export default function Form({ content, orderRequest }: Props) {
                 },
                 products: items.map((item) => ({
                     id: item.id,
-                    price: item.preco
+                    price: item.preco * item.quantity
                 }))
             });
         }
