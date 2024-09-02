@@ -1,9 +1,10 @@
 import logo from '../../assets/logo.svg';
+import { H1 } from './styled';
 
 export default function SiteTitle() {
     return (
-        <h1>
+        <H1>
             <img src={logo} alt="eFood" />
-        </h1>
+        </H1>
     )
 }
