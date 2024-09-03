@@ -16,10 +16,6 @@ export const SubTitle = styled.h2`
     }
 `
 
-export const SearchSection = styled.section`
-    margin-bottom: 32px;
-`
-
 export const RestaurantList = styled.ul`
     list-style: none;
     display: grid;

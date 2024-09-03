@@ -4,13 +4,13 @@ import { filterRestaurants } from '../../utils/filterSearch';
 
 import HeaderContainer from "../../styles/HeaderContainer";
 import SiteTitle from "../../components/SiteTitle";
-import { RestaurantList, SearchSection, SubTitle } from "./styled";
+import { RestaurantList, SubTitle } from "./styled";
 import RestaurantCard from "../../components/RestaurantCard";
 import { RestaurantContext } from '../../contexts/RestaurantContext';
 import Loader from '../../components/Loader';
-import SearchContainer from '../../styles/SearchContainer';
 import Input from '../../components/Input';
 import NotFoundWarn from '../../styles/SearchNotFound';
+import ContentHeader from '../../styles/SectionHeader';
 
 export default function Home() {
     const [search, setSearch] = useState('');
@@ -23,12 +23,12 @@ export default function Home() {
                 <SubTitle>Viva experiências gastronômicas no conforto da sua casa.</SubTitle>
             </HeaderContainer>
             <main>
+                <ContentHeader>
+                    <div className='container'>
+                        <Input label='Onde vai pedir?' elementId='restaurant_search' value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />
+                    </div>
+                </ContentHeader>
                 <div className='container'>
-                    <SearchSection>
-                        <SearchContainer>
-                            <Input label='Onde vai pedir?' elementId='restaurant_search' value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />
-                        </SearchContainer>
-                    </SearchSection>
                     {
                         !restaurants ? <Loader /> : <>
                             {

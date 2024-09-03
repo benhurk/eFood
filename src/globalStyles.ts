@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     main {
-        padding: 80px 0 120px 0;
+        padding: 0 0 120px 0;
         background-color: ${colors.bgLight};
     }
 `

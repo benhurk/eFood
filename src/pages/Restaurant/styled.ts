@@ -22,21 +22,16 @@ export const BackLink = styled(Link)`
     color: ${colors.red};
 
     img {
-        width: 24px;
+        width: 32px;
     }
-`
-
-export const RestaurantHeader = styled.section`
-    margin-bottom: 32px;
-    padding-bottom: 32px;
-    border-bottom: 2px solid ${colors.red};
 `
 
 export const RestaurantDescription = styled.p`
     font-size: 16px;
-    color: ${colors.red};
+    color: ${colors.cream};
     line-height: 24px;
     margin-bottom: 16px;
+    text-shadow: 1px 1px 8px #555;
 
     @media (max-width: 767px) {
         font-size: 14px;
