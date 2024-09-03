@@ -11,11 +11,25 @@ export const SocialLinks = styled.ul`
     display: flex;
     gap: 8px;
     justify-content: center;
-    margin-top: 32px;
-    margin-bottom: 80px;
+    margin-top: 24px;
+    margin-bottom: 48px;
 `
 
 export const FooterText = styled.p`
     font-size: 10px;
-    color: ${colors.red}
+    color: ${colors.red};
+`
+
+export const UpButton = styled.button`
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 16px;
+    background-color: ${colors.red};
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    img {
+        width: 28px;
+    }
 `
