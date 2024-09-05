@@ -8,13 +8,11 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Restaurant from "./pages/Restaurant";
 import ModalProvider from "./contexts/ModalContext";
-import RestaurantProvider from "./contexts/RestaurantContext";
 
 function App() {
   return (
     <Provider store={store}>
       <GlobalStyles />
-      <RestaurantProvider>
         <ModalProvider>
           <BrowserRouter>
             <Routes>
@@ -23,7 +21,6 @@ function App() {
             </Routes>
           </BrowserRouter>
         </ModalProvider>
-      </RestaurantProvider>
       <Footer />
     </Provider>
   )
