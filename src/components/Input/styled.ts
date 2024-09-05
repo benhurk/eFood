@@ -3,6 +3,7 @@ import { colors } from "../../globalStyles";
 import ReactInputMask from "react-input-mask";
 
 export const InputContainer = styled.div`
+    max-width: 512px;
     width: 100%;
 `
 
