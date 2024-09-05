@@ -30,7 +30,7 @@ export const RestaurantDescription = styled.p`
     font-size: 16px;
     color: ${colors.cream};
     line-height: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     text-shadow: 1px 1px 8px #555;
 
     @media (max-width: 767px) {
