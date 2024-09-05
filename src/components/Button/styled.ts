@@ -10,7 +10,7 @@ const Btn = styled.button<Props>`
     font-size: 14px;
     font-weight: 700;
     border: none;
-    padding: 4px 6px;
+    padding: 6px 8px;
     width: ${(props) => (props.width)};
     cursor: pointer;
 `
