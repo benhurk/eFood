@@ -21,7 +21,11 @@ export const FooterText = styled.p`
 `
 
 export const UpButton = styled.button`
-    display: block;
+    display: flex;
+    align-items: center;
+    color: ${colors.cream};
+    font-weight: 700;
+    padding: 2px 6px 2px 0;
     margin-inline: auto;
     margin-bottom: 16px;
     background-color: ${colors.red};

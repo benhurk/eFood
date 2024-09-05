@@ -26,7 +26,7 @@ export default function Footer() {
                     <a href='#'><img src={twitterIcon} /></a>
                 </li>
             </SocialLinks>
-            <UpButton type='button' onClick={() => scrollToTop()}><img src={upArrow} alt='^' /></UpButton>
+            <UpButton type='button' onClick={() => scrollToTop()}><img src={upArrow} alt='^' />Voltar ao topo</UpButton>
             <FooterText>
                 A efood é uma plataforma para divulgação de estabelecimentos, a responsabilidade pela entrega, qualidade dos produtos é toda do estabelecimento contratado.
             </FooterText>
