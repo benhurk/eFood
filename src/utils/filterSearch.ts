@@ -6,8 +6,8 @@ export function filterProducts(products: ProductType[], searchFor: string): Prod
     })
 }
 
-export function filterRestaurants(restaurants: RestaurantType[], searchFor: string, /*type: string*/): RestaurantType[] {
+export function filterRestaurants(restaurants: RestaurantType[], searchFor: string, type: string): RestaurantType[] {
     return restaurants.filter(r => {
-        return r.titulo.toLowerCase().includes(searchFor.toLowerCase()) /*&& r.tipo.includes(type)*/;
+        return r.titulo.toLowerCase().includes(searchFor.toLowerCase()) && r.tipo.includes(type);
     })
 }
